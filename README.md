@@ -1,5 +1,15 @@
 # html-webpack-inject-plugin
 
+[![node](https://img.shields.io/node/v/html-webpack-inject-plugin.svg)](https://www.npmjs.com/package/html-webpack-inject-plugin)
+[![npm](https://img.shields.io/npm/v/html-webpack-inject-plugin.svg)](https://www.npmjs.com/package/html-webpack-inject-plugin)
+[![license](https://img.shields.io/npm/l/html-webpack-inject-plugin.svg)](https://github.com/kagawagao/html-webpack-inject-plugin/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/kagawagao/html-webpack-inject-plugin.svg?branch=master)](https://travis-ci.org/kagawagao/html-webpack-inject-plugin)
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](http://standardjs.com/)
+[![bitHound Overall Score](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/badges/score.svg)](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin)
+[![bitHound Dependencies](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/badges/dependencies.svg)](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/badges/devDependencies.svg)](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/master/dependencies/npm)
+[![Coveralls github](https://img.shields.io/coveralls/github/kagawagao/html-webpack-inject-plugin.svg)](https://coveralls.io/github/kagawagao/html-webpack-inject-plugin)
+
 inject external tag to html
 
 ## Installation
@@ -25,7 +35,7 @@ Add the plugin to your webpack config as follows
 ```javascript
 plugins: [
   new HtmlWebpackPlugin(),
-  new HtmlWebpackIncludeAssetsPlugin({
+  new HtmlWebpackInjectPlugin({
     externals: [{
       tag: 'script',
       attrs: {
@@ -40,7 +50,7 @@ plugins: [
 
 ## Options
 
-- `externals: Array<Tag>`: external [tags](#Tag) which you want to add
+- `externals: Array<Tag>`: external [tags](#tag) which you want to add
 
 - `parent`: parent element will be added into, only can be `head` and `body`, default value is `head`
 
