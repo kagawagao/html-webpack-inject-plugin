@@ -42,5 +42,8 @@
   },
   "peerDependencies": {
     "html-webpack-plugin": "^2.30.1"
+  },
+  "engines": {
+    "node": "^4"
   }
 }
