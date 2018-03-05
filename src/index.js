@@ -18,8 +18,8 @@ export default class HtmlWebpackInjectPlugin {
   }
 
   apply = (compiler) => {
-    compiler.plugin('compilation', (compilation) => {
-      compilation.plugin('html-webpack-plugin-alter-asset-tags', (htmlPluginData, cb) => {
+    compiler.hooks.compilation.tap('HtmlWebpackInjectPlugin', (compilation) => {
+      compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
         if (this.parent === 'head') {
           htmlPluginData.head = htmlPluginData.head.concat(this.assets)
         } else {
