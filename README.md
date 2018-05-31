@@ -5,9 +5,6 @@
 [![license](https://img.shields.io/npm/l/html-webpack-inject-plugin.svg)](https://github.com/kagawagao/html-webpack-inject-plugin/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/kagawagao/html-webpack-inject-plugin.svg?branch=master)](https://travis-ci.org/kagawagao/html-webpack-inject-plugin)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](http://standardjs.com/)
-[![bitHound Overall Score](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/badges/score.svg)](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin)
-[![bitHound Dependencies](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/badges/dependencies.svg)](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/badges/devDependencies.svg)](https://www.bithound.io/github/kagawagao/html-webpack-inject-plugin/master/dependencies/npm)
 
 inject external tag to html
 
