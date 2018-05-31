@@ -13,10 +13,18 @@ inject external tag to html
 
 ## Installation
 
-You must be running webpack on node 4.x or higher
+You must be running webpack on node 6.x or higher
+
+### `webpack v4.x`
 
 ```bash
 npm install --save-dev html-webpack-inject-plugin
+```
+
+### `webpack v3.x` or lower
+
+```bash
+npm install --save-dev html-webpack-inject-plugin@1.x
 ```
 
 ## Usage
@@ -26,7 +34,7 @@ Require the plugin in your webpack config
 ```javascript
 import HtmlWebpackInjectPlugin from 'html-webpack-inject-plugin'
 // or
-var HtmlWebpackInjectPlugin = require('html-webpack-inject-plugin')
+const HtmlWebpackInjectPlugin = require('html-webpack-inject-plugin')
 ```
 
 Add the plugin to your webpack config as follows
