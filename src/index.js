@@ -18,15 +18,19 @@ export default class HtmlWebpackInjectPlugin {
   }
 
   apply = (compiler) => {
-    compiler.hooks.compilation.tap('HtmlWebpackInjectPlugin', (compilation) => {
-      compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
-        if (this.parent === 'head') {
-          htmlPluginData.head = htmlPluginData.head.concat(this.assets)
-        } else {
-          htmlPluginData.body = this.assets.concat(htmlPluginData.body)
-        }
-        return cb(null, htmlPluginData)
+    (compiler.hooks
+      ? compiler.hooks.compilation.tap.bind(compiler.hooks.compilation, 'HtmlWebpackInjectPlugin')
+      : compiler.plugin.bind(compiler, 'compilation'))(compilation => {
+        (compilation.hooks
+        ? compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync.bind(compilation.hooks.htmlWebpackPluginAlterAssetTags, 'HtmlWebpackInjectPlugin')
+        : compilation.plugin.bind(compilation, 'html-webpack-plugin-alter-asset-tags'))((htmlPluginData, cb) => {
+          if (this.parent === 'head') {
+            htmlPluginData.head = htmlPluginData.head.concat(this.assets)
+          } else {
+            htmlPluginData.body = this.assets.concat(htmlPluginData.body)
+          }
+          return cb(null, htmlPluginData)
+        })
       })
-    })
   }
 }
