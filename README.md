@@ -31,7 +31,7 @@ Require the plugin in your webpack config
 ```javascript
 import HtmlWebpackInjectPlugin from 'html-webpack-inject-plugin'
 // or
-const HtmlWebpackInjectPlugin = require('html-webpack-inject-plugin')
+const HtmlWebpackInjectPlugin = require('html-webpack-inject-plugin').default
 ```
 
 Add the plugin to your webpack config as follows
