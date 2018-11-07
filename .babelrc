@@ -1,16 +1,15 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "target": {
+        "targets": {
           "node": 4
         }
       }
-    ],
-    "stage-0"
+    ]
   ],
   "plugins": [
-    "add-module-exports"
+    "@babel/plugin-proposal-class-properties"
   ]
 }

@@ -3,7 +3,7 @@ export default class HtmlWebpackInjectPlugin {
   constructor (config) {
     const { externals = [], parent = 'head' } = config
 
-    this.assets = externals.map(({tag = 'meta', attrs = {}}) => {
+    this.assets = externals.map(({ tag = 'meta', attrs = {} }) => {
       return {
         tagName: tag,
         attributes: attrs,
