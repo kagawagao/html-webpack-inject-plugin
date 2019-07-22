@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-inject-plugin",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "inject external source to html",
   "main": "lib/index.js",
   "scripts": {
