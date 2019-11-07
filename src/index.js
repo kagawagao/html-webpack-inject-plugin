@@ -1,7 +1,6 @@
-
 export default class HtmlWebpackInjectPlugin {
   constructor (config) {
-    const { externals = [], parent = 'head' } = config
+    const { externals = [], parent = 'head', prepend = false } = config
 
     this.assets = externals.map(({ tag = 'meta', attrs = {} }) => {
       return {
@@ -12,21 +11,25 @@ export default class HtmlWebpackInjectPlugin {
     })
 
     if (parent !== 'head' && parent !== 'body') {
-      throw new TypeError('parent should be one of head and body')
+      throw new TypeError('parent should be one of `head` or `body`')
     }
+
     this.parent = parent
+
+    this.prepend = prepend
   }
 
-  apply = (compiler) => {
-    compiler.hooks.compilation.tap('HtmlWebpackInjectPlugin', (compilation) => {
-      compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
-        if (this.parent === 'head') {
-          htmlPluginData.head = htmlPluginData.head.concat(this.assets)
-        } else {
-          htmlPluginData.body = this.assets.concat(htmlPluginData.body)
+  apply = compiler => {
+    compiler.hooks.compilation.tap('HtmlWebpackInjectPlugin', compilation => {
+      compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync(
+        'HtmlWebpackInjectPlugin',
+        (htmlPluginData, cb) => {
+          htmlPluginData[this.parent] = this.prepend
+            ? this.assets.concat(htmlPluginData[this.parent])
+            : htmlPluginData[this.parent].concat(this.assets)
+          return cb(null, htmlPluginData)
         }
-        return cb(null, htmlPluginData)
-      })
+      )
     })
   }
 }

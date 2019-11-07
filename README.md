@@ -40,14 +40,17 @@ Add the plugin to your webpack config as follows
 plugins: [
   new HtmlWebpackPlugin(),
   new HtmlWebpackInjectPlugin({
-    externals: [{
-      tag: 'script',
-      attrs: {
-        src: 'your-script.js',
-        type: 'text/javascript'
+    externals: [
+      {
+        tag: 'script',
+        attrs: {
+          src: 'your-script.js',
+          type: 'text/javascript'
+        }
       }
-    }],
-    parent: 'head' // default is head
+    ],
+    parent: 'head', // default is head
+    prepend: true // default is false
   })
 ]
 ```
@@ -57,6 +60,8 @@ plugins: [
 - `externals: Array<Tag>`: external [tags](#tag) which you want to add
 
 - `parent`: parent element will be added into, only can be `head` and `body`, default value is `head`
+
+- `prepend`: insert before parent first child
 
 ## Tag
 
