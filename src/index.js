@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 export default class HtmlWebpackInjectPlugin {
   constructor (config) {
     const { externals = [], parent = 'head', prepend = false } = config
@@ -21,15 +23,18 @@ export default class HtmlWebpackInjectPlugin {
 
   apply = compiler => {
     compiler.hooks.compilation.tap('HtmlWebpackInjectPlugin', compilation => {
-      compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync(
-        'HtmlWebpackInjectPlugin',
-        (htmlPluginData, cb) => {
-          htmlPluginData[this.parent] = this.prepend
-            ? this.assets.concat(htmlPluginData[this.parent])
-            : htmlPluginData[this.parent].concat(this.assets)
-          return cb(null, htmlPluginData)
-        }
-      )
+      const hooks =
+        HtmlWebpackPlugin.version === 4
+          ? HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups
+          : compilation.hooks.htmlWebpackPluginAlterAssetTags
+
+      hooks.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
+        const tags = htmlPluginData[`${this.parent}Tags`]
+        htmlPluginData[`${this.parent}Tags`] = this.prepend
+          ? this.assets.concat(tags)
+          : tags.concat(this.assets)
+        return cb(null, htmlPluginData)
+      })
     })
   }
 }
