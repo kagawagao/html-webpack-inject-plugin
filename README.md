@@ -57,13 +57,8 @@ plugins: [
 
 ## Options
 
-- `externals: <HTMLTagObject>[]`: external [HTMLTagObject](#https://github.com/jantimon/html-webpack-plugin/blob/6e17a0cd7e99c08fdf6eb6e79b88f589af35c645/typings.d.ts#L238-L260) which you want to add
+- `externals: <HTMLTagObject>[]`: external [HTMLTagObject](https://github.com/jantimon/html-webpack-plugin/blob/6e17a0cd7e99c08fdf6eb6e79b88f589af35c645/typings.d.ts#L238-L260) which you want to add
 
 - `parent`: parent element will be added into, only can be `head` and `body`, default value is `head`
 
 - `prepend`: insert before parent first child
-
-## Tag
-
-- `tag`: tag name, such as `meta` `link` `script`
-- `attrs`: [html attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)
