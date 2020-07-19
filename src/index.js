@@ -4,13 +4,16 @@ export default class HtmlWebpackInjectPlugin {
   constructor(config) {
     const { externals = [], parent = 'head', prepend = false } = config
 
-    this.assets = externals.map(({ tag = 'meta', attrs = {} }) => {
-      return {
-        tagName: tag,
-        attributes: attrs,
-        closeTag: true
+    this.assets = externals.map(
+      ({ tag = 'meta', attrs = {}, innerHTML, voidTag }) => {
+        return {
+          tagName: tag,
+          attributes: attrs,
+          innerHTML,
+          voidTag
+        }
       }
-    })
+    )
 
     if (parent !== 'head' && parent !== 'body') {
       throw new TypeError('parent should be one of `head` or `body`')
