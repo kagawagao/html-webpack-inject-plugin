@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint ./src --fix",
-    "prepublishOnly": "npm run lint",
+    "prepublishOnly": "npm run build",
     "build": "babel src -d lib --extensions .ts & tsc",
     "prepare": "npm run build"
   },
