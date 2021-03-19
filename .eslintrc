@@ -1,8 +1,3 @@
 {
-  "extends": ["standard", "prettier"],
-  "plugins": ["prettier"],
-  "parser": "babel-eslint",
-  "rules": {
-    "prettier/prettier": "error"
-  }
+  "extends": ["@opd/eslint-config-typescript"]
 }
