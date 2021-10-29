@@ -48,8 +48,8 @@ export default class HtmlWebpackInjectPlugin {
     compiler.hooks.compilation.tap(
       'HtmlWebpackInjectPlugin',
       (compilation: Compilation) => {
-        const hooks = HtmlWebpackPlugin.getHooks(compilation)
-          .alterAssetTagGroups
+        const hooks =
+          HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups
 
         hooks.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
           const propertyName = `${this.parent}Tags` as 'headTags' | 'bodyTags'
