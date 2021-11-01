@@ -3,8 +3,9 @@ import { Compilation, Compiler } from 'webpack'
 
 type Parent = 'head' | 'body'
 
-export interface ExternalItem extends HtmlTagObject {
+export interface ExternalItem extends Omit<HtmlTagObject, 'voidTag' | 'meta'> {
   tag?: string
+  voidTag?: boolean
   attrs?: Record<string, string | boolean | null | undefined>
 }
 
@@ -25,10 +26,10 @@ export default class HtmlWebpackInjectPlugin {
       ({
         tag = 'meta',
         tagName,
-        attributes = {},
+        attributes,
         attrs = {},
         innerHTML,
-        voidTag
+        voidTag = false
       }) => {
         return {
           tagName: tagName || tag,
