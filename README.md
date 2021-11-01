@@ -42,8 +42,8 @@ plugins: [
   new HtmlWebpackInjectPlugin({
     externals: [
       {
-        tag: 'script',
-        attrs: {
+        tagName: 'script',
+        attributes: {
           src: 'your-script.js',
           type: 'text/javascript'
         }

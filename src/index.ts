@@ -3,13 +3,13 @@ import { Compilation, Compiler } from 'webpack'
 
 type Parent = 'head' | 'body'
 
-export interface ExternalItem {
+export interface ExternalItem extends HtmlTagObject {
   tag?: string
   attrs?: Record<string, string | boolean | null | undefined>
 }
 
 export interface HtmlWebpackInjectPluginConfig {
-  externals?: any[]
+  externals?: ExternalItem[]
   parent?: Parent
   prepend?: boolean
 }
@@ -22,10 +22,17 @@ export default class HtmlWebpackInjectPlugin {
     const { externals = [], parent = 'head', prepend = false } = config
 
     this.assets = externals.map(
-      ({ tag = 'meta', attrs = {}, innerHTML, voidTag }) => {
+      ({
+        tag = 'meta',
+        tagName,
+        attributes = {},
+        attrs = {},
+        innerHTML,
+        voidTag
+      }) => {
         return {
-          tagName: tag,
-          attributes: attrs,
+          tagName: tagName || tag,
+          attributes: attributes || attrs,
           innerHTML,
           voidTag,
           meta: {
