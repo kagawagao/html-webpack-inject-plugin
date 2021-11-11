@@ -10,18 +10,8 @@ inject external tag to html
 
 ## Installation
 
-You must be running webpack on node 6.x or higher
-
-### `webpack v4.x`
-
 ```bash
 npm install --save-dev html-webpack-inject-plugin
-```
-
-### `webpack v3.x` or lower
-
-```bash
-npm install --save-dev html-webpack-inject-plugin@1.x
 ```
 
 ## Usage
