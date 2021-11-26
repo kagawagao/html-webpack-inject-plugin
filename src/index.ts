@@ -51,7 +51,7 @@ export default class HtmlWebpackInjectPlugin {
         hooks.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
           this.assets.forEach((asset) => {
             const tagName = (
-              asset.tagName === 'meta' ? `${asset.tagName}s` : asset.tagName
+              asset.tagName !== 'meta' ? `${asset.tagName}s` : asset.tagName
             ) as keyof typeof htmlPluginData.assetTags
             const tags = htmlPluginData.assetTags[tagName]
             htmlPluginData.assetTags[tagName] = this.prepend
