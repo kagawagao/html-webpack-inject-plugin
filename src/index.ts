@@ -49,11 +49,13 @@ export default class HtmlWebpackInjectPlugin {
         const hooks = HtmlWebpackPlugin.getHooks(compilation).alterAssetTags
 
         hooks.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
-          this.assets.map((asset) => {
+          this.assets.forEach((asset) => {
             const tagName =
               asset.tagName as keyof typeof htmlPluginData.assetTags
             const tags = htmlPluginData.assetTags[tagName]
-            this.prepend ? [asset].concat(tags) : tags.concat(asset)
+            htmlPluginData.assetTags[tagName] = this.prepend
+              ? [asset].concat(tags)
+              : tags.concat(asset)
           })
           return cb(null, htmlPluginData)
         })
