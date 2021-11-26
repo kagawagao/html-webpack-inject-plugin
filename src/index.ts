@@ -1,26 +1,22 @@
 import HtmlWebpackPlugin, { HtmlTagObject } from 'html-webpack-plugin'
 import { Compilation, Compiler } from 'webpack'
 
-type Parent = 'head' | 'body'
-
 export interface ExternalItem extends Omit<HtmlTagObject, 'voidTag' | 'meta'> {
-  tag?: string
+  tag?: 'script' | 'style' | 'meta'
   voidTag?: boolean
   attrs?: Record<string, string | boolean | null | undefined>
 }
 
 export interface HtmlWebpackInjectPluginConfig {
   externals?: ExternalItem[]
-  parent?: Parent
   prepend?: boolean
 }
 
 export default class HtmlWebpackInjectPlugin {
   assets: HtmlTagObject[]
-  parent: Parent
   prepend: boolean
   constructor(config: HtmlWebpackInjectPluginConfig) {
-    const { externals = [], parent = 'head', prepend = false } = config
+    const { externals = [], prepend = false } = config
 
     this.assets = externals.map(
       ({
@@ -43,12 +39,6 @@ export default class HtmlWebpackInjectPlugin {
       }
     )
 
-    if (parent !== 'head' && parent !== 'body') {
-      throw new TypeError('parent should be one of `head` or `body`')
-    }
-
-    this.parent = parent
-
     this.prepend = prepend
   }
 
@@ -56,15 +46,15 @@ export default class HtmlWebpackInjectPlugin {
     compiler.hooks.compilation.tap(
       'HtmlWebpackInjectPlugin',
       (compilation: Compilation) => {
-        const hooks =
-          HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups
+        const hooks = HtmlWebpackPlugin.getHooks(compilation).alterAssetTags
 
         hooks.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
-          const propertyName = `${this.parent}Tags` as 'headTags' | 'bodyTags'
-          const tags = htmlPluginData[propertyName]
-          htmlPluginData[propertyName] = this.prepend
-            ? this.assets.concat(tags)
-            : tags.concat(this.assets)
+          this.assets.map((asset) => {
+            const tagName =
+              asset.tagName as keyof typeof htmlPluginData.assetTags
+            const tags = htmlPluginData.assetTags[tagName]
+            this.prepend ? [asset].concat(tags) : tags.concat(asset)
+          })
           return cb(null, htmlPluginData)
         })
       }
