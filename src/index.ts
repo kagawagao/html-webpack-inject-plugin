@@ -15,21 +15,27 @@ export interface HtmlWebpackInjectPluginConfig {
 export default class HtmlWebpackInjectPlugin {
   assets: HtmlTagObject[]
   prepend: boolean
-  constructor(config: HtmlWebpackInjectPluginConfig) {
+  constructor(config: HtmlWebpackInjectPluginConfig = {}) {
     const { externals = [], prepend = false } = config
 
-    this.assets = externals.map(
+    this.assets = this.mapping(externals)
+
+    this.prepend = prepend
+  }
+
+  mapping = (externals: ExternalItem[] = []) => {
+    return externals.map(
       ({
         tag = 'meta',
-        tagName,
-        attributes,
+        tagName = tag,
         attrs = {},
+        attributes = attrs,
         innerHTML,
         voidTag = false
       }) => {
         return {
-          tagName: tagName || tag,
-          attributes: attributes || attrs,
+          tagName,
+          attributes,
           innerHTML,
           voidTag,
           meta: {
@@ -38,8 +44,6 @@ export default class HtmlWebpackInjectPlugin {
         }
       }
     )
-
-    this.prepend = prepend
   }
 
   apply = (compiler: Compiler) => {
@@ -49,11 +53,20 @@ export default class HtmlWebpackInjectPlugin {
         const hooks = HtmlWebpackPlugin.getHooks(compilation).alterAssetTags
 
         hooks.tapAsync('HtmlWebpackInjectPlugin', (htmlPluginData, cb) => {
-          this.assets.forEach((asset) => {
+          const {
+            // eslint-disable-next-line no-empty-pattern
+            externals = []
+          } = htmlPluginData.plugin.userOptions
+
+          const tagsInInstance = [...this.mapping(externals), ...this.assets]
+
+          tagsInInstance.forEach((asset) => {
             const tagName = (
               asset.tagName !== 'meta' ? `${asset.tagName}s` : asset.tagName
             ) as keyof typeof htmlPluginData.assetTags
+
             const tags = htmlPluginData.assetTags[tagName]
+
             htmlPluginData.assetTags[tagName] = this.prepend
               ? [asset].concat(tags)
               : tags.concat(asset)

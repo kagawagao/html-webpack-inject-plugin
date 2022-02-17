@@ -29,12 +29,24 @@ Add the plugin to your webpack config as follows
 ```javascript
 plugins: [
   new HtmlWebpackPlugin(),
+  new HtmlWebpackPlugin({
+    filename: 'other.html',
+    externals: [
+      {
+        tagName: 'script',
+        attributes: {
+          src: 'special-script.js',
+          type: 'text/javascript'
+        }
+      }
+    ]
+  }),
   new HtmlWebpackInjectPlugin({
     externals: [
       {
         tagName: 'script',
         attributes: {
-          src: 'your-script.js',
+          src: 'common-script.js',
           type: 'text/javascript'
         }
       }
