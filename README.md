@@ -59,5 +59,5 @@ plugins: [
 
 ## Options
 
-- `externals: <HTMLTagObject>[]`: external [HTMLTagObject](https://github.com/jantimon/html-webpack-plugin/blob/6e17a0cd7e99c08fdf6eb6e79b88f589af35c645/typings.d.ts#L238-L260) which you want to add
+- `externals: <HtmlAssetItem>[]`: external HTMLTagObject which you want to add
 - `prepend`: insert before parent first child

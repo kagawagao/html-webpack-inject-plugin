@@ -10,6 +10,8 @@ export interface ExternalItem extends Omit<HtmlTagObject, 'voidTag' | 'meta'> {
   include?: IncludeFilter
 }
 
+// extends HtmlTagObject
+// https://github.com/jantimon/html-webpack-plugin/blob/6e17a0cd7e99c08fdf6eb6e79b88f589af35c645/typings.d.ts#L238-L260
 export interface HtmlAssetItem extends HtmlTagObject {
   include?: IncludeFilter
 }
