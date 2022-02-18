@@ -1,0 +1,21 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          check-latest: true
+      - name: npm install, test and build
+        run: |
+          npm ci
+          npm run build
+      - name: Codecov
+        uses: codecov/codecov-action@v1.5.0
+        env:
+          CI: true
