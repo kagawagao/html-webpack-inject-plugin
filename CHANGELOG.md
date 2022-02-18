@@ -1,3 +1,12 @@
+## [5.3.1](https://github.com/kagawagao/html-webpack-inject-plugin/compare/v5.2.3...v5.3.1) (2022-02-18)
+
+
+### Features
+
+* support inject filter ([6095b6f](https://github.com/kagawagao/html-webpack-inject-plugin/commit/6095b6ffc901c4a14fdd0915aa7b7db8e0522725))
+
+
+
 # [5.3.0](https://github.com/kagawagao/html-webpack-inject-plugin/compare/v5.2.3...v5.3.0) (2022-02-18)
 
 
