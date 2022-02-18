@@ -52,7 +52,7 @@
     "webpack": "^5.26.3"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">= 14"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
