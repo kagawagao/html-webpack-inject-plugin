@@ -28,15 +28,28 @@ Add the plugin to your webpack config as follows
 
 ```javascript
 plugins: [
-  new HtmlWebpackPlugin(),
+  new HtmlWebpackPlugin({
+    filename: 'index.html'
+  }),
+  new HtmlWebpackPlugin({
+    filename: 'other.html'
+  }),
   new HtmlWebpackInjectPlugin({
     externals: [
       {
         tagName: 'script',
         attributes: {
-          src: 'your-script.js',
+          src: 'common-script.js',
           type: 'text/javascript'
         }
+      },
+      {
+        tagName: 'script',
+        attributes: {
+          src: 'only-inject-to-other-script.js',
+          type: 'text/javascript'
+        },
+        include: ['other.html']
       }
     ],
     prepend: true // default is false
