@@ -41,7 +41,7 @@
     "conventional-changelog-cli": "^4.0.0",
     "diff-run": "^1.1.0",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^8.0.0",
+    "husky": "^9.0.6",
     "lint-staged": "^15.0.1",
     "prettier": "^3.0.0",
     "typescript": "^5.0.2",
