@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-typescript": "^7.13.0",
     "@commitlint/cli": "^18.2.0",
-    "@commitlint/config-conventional": "^18.0.0",
+    "@commitlint/config-conventional": "^19.1.0",
     "@opd/eslint-config-typescript": "^1.13.5",
     "conventional-changelog-cli": "^4.0.0",
     "diff-run": "^1.1.0",
